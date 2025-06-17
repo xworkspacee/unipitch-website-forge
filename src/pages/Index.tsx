@@ -1,8 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, CheckCircle, Users, Zap, Shield, Smartphone, Search, TrendingUp, Code, Star } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ArrowRight, CheckCircle, Users, Zap, Shield, Smartphone, Search, TrendingUp, Code, Star, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
@@ -88,6 +88,67 @@ const Index = () => {
     "Training Guide & Video Tutorial"
   ];
 
+  const pricingPlans = [
+    {
+      type: "Business/Company",
+      priceRange: "₹2,000 - ₹7,000",
+      basic: {
+        name: "Basic Plan",
+        subtitle: "Static / One-page",
+        features: ["Home", "About", "Contact Form", "Responsive design"]
+      },
+      medium: {
+        name: "Medium Plan", 
+        subtitle: "Multi-page / Semi-dynamic",
+        features: ["+ Services page", "+ Testimonials", "+ Gallery/Team", "+ WhatsApp chat"]
+      },
+      standard: {
+        name: "Standard Plan",
+        subtitle: "Fully dynamic / Advanced", 
+        features: ["+ Blog/News", "+ Admin Panel", "+ Live Chat", "+ SEO + Analytics"]
+      }
+    },
+    {
+      type: "E-commerce",
+      priceRange: "₹7,000 - ₹15,000",
+      basic: {
+        name: "Basic Plan",
+        subtitle: "Static / One-page",
+        features: ["Home", "Product List (Static)", "Contact Info"]
+      },
+      medium: {
+        name: "Medium Plan",
+        subtitle: "Multi-page / Semi-dynamic", 
+        features: ["+ Product pages", "+ Cart (Static)", "+ Inquiry form"]
+      },
+      standard: {
+        name: "Standard Plan",
+        subtitle: "Fully dynamic / Advanced",
+        features: ["+ Add to Cart", "+ Payment Gateway", "+ Admin Dashboard", "+ Order Management"]
+      }
+    },
+    {
+      type: "Service-Based",
+      priceRange: "₹3,000 - ₹12,000",
+      subtitle: "(Doctors, Salons, etc.)",
+      basic: {
+        name: "Basic Plan", 
+        subtitle: "Static / One-page",
+        features: ["Home", "Services", "Contact Page"]
+      },
+      medium: {
+        name: "Medium Plan",
+        subtitle: "Multi-page / Semi-dynamic",
+        features: ["+ Booking Form", "+ Testimonials", "+ Map Integration"] 
+      },
+      standard: {
+        name: "Standard Plan",
+        subtitle: "Fully dynamic / Advanced",
+        features: ["+ Online Booking System", "+ Payment Integration", "+ Reviews + Notifications"]
+      }
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100">
       {/* Header */}
@@ -103,6 +164,7 @@ const Index = () => {
           </div>
           <nav className="hidden md:flex items-center space-x-6">
             <a href="#services" className="text-gray-700 hover:text-purple-600 transition-colors">Services</a>
+            <a href="#pricing" className="text-gray-700 hover:text-purple-600 transition-colors">Pricing</a>
             <a href="#process" className="text-gray-700 hover:text-purple-600 transition-colors">Process</a>
             <a href="#benefits" className="text-gray-700 hover:text-purple-600 transition-colors">Benefits</a>
             <a href="#contact" className="text-gray-700 hover:text-purple-600 transition-colors">Contact</a>
@@ -200,6 +262,121 @@ const Index = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+      </section>
+
+      {/* Pricing Plans Section */}
+      <section id="pricing" className="py-16 bg-gradient-to-r from-purple-50 to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Website Package Plans</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Choose the perfect plan based on your website functionality needs and budget
+            </p>
+          </div>
+
+          <div className="space-y-12">
+            {pricingPlans.map((plan, index) => (
+              <Card key={index} className="overflow-hidden shadow-lg border-purple-200">
+                <CardHeader className="bg-gradient-to-r from-purple-100 to-blue-100 text-center">
+                  <CardTitle className="text-2xl text-purple-800">{plan.type}</CardTitle>
+                  <CardDescription className="text-lg font-semibold text-purple-600">
+                    {plan.priceRange}
+                  </CardDescription>
+                  {plan.subtitle && (
+                    <p className="text-sm text-gray-600">{plan.subtitle}</p>
+                  )}
+                </CardHeader>
+                <CardContent className="p-0">
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="bg-gray-50">
+                          <TableHead className="font-bold text-center">Basic Plan</TableHead>
+                          <TableHead className="font-bold text-center">Medium Plan</TableHead>  
+                          <TableHead className="font-bold text-center">Standard Plan</TableHead>
+                        </TableRow>
+                        <TableRow className="bg-gray-25">
+                          <TableHead className="text-center text-sm text-gray-600 font-normal">
+                            {plan.basic.subtitle}
+                          </TableHead>
+                          <TableHead className="text-center text-sm text-gray-600 font-normal">
+                            {plan.medium.subtitle}
+                          </TableHead>
+                          <TableHead className="text-center text-sm text-gray-600 font-normal">
+                            {plan.standard.subtitle}
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell className="align-top p-6">
+                            <div className="space-y-3">
+                              {plan.basic.features.map((feature, idx) => (
+                                <div key={idx} className="flex items-center space-x-2">
+                                  <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
+                                  <span className="text-sm">{feature}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </TableCell>
+                          <TableCell className="align-top p-6 bg-purple-25">
+                            <div className="space-y-3">
+                              {plan.basic.features.map((feature, idx) => (
+                                <div key={idx} className="flex items-center space-x-2 text-gray-500">
+                                  <Check className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                                  <span className="text-sm">{feature}</span>
+                                </div>
+                              ))}
+                              {plan.medium.features.map((feature, idx) => (
+                                <div key={idx} className="flex items-center space-x-2">
+                                  <Check className="h-4 w-4 text-purple-500 flex-shrink-0" />
+                                  <span className="text-sm font-medium">{feature}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </TableCell>
+                          <TableCell className="align-top p-6">
+                            <div className="space-y-3">
+                              {plan.basic.features.map((feature, idx) => (
+                                <div key={idx} className="flex items-center space-x-2 text-gray-500">
+                                  <Check className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                                  <span className="text-sm">{feature}</span>
+                                </div>
+                              ))}
+                              {plan.medium.features.map((feature, idx) => (
+                                <div key={idx} className="flex items-center space-x-2 text-gray-500">
+                                  <Check className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                                  <span className="text-sm">{feature}</span>
+                                </div>
+                              ))}
+                              {plan.standard.features.map((feature, idx) => (
+                                <div key={idx} className="flex items-center space-x-2">
+                                  <Check className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                                  <span className="text-sm font-medium text-blue-700">{feature}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-lg text-gray-600 mb-6">
+              💡 All plans include responsive design, basic SEO, and 1-year maintenance
+            </p>
+            <Link to="/apply">
+              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                Choose Your Plan - Apply Now <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
